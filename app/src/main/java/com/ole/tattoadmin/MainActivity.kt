@@ -22,10 +22,10 @@ class MainActivity : ComponentActivity() {
 
     private val monthsCollectionRef = Firebase.firestore.collection("Months")
     //Default working hours in that month
-    val startTimeMorning: LocalTime = LocalTime.of(10,0)
-    val finishTimeMorning: LocalTime = LocalTime.of(14,0)
-    val startTimeEvening: LocalTime = LocalTime.of(17,0)
-    val finishTimeEvening: LocalTime = LocalTime.of(20,0)
+    val startTimeMorning: List<Int> = listOf<Int>(10,0)
+    val finishTimeMorning: List<Int> = listOf<Int>(14,0)
+    val startTimeEvening: List<Int> = listOf<Int>(17,0)
+    val finishTimeEvening: List<Int> = listOf<Int>(20,0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

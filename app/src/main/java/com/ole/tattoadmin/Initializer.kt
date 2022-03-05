@@ -10,10 +10,10 @@ import java.time.YearMonth
 class Initializer(
     private var yearNumber: Int,
     private var monthNumber: Int,
-    private var startMorning: LocalTime,
-    private var finishMorning: LocalTime,
-    private var startEvening: LocalTime,
-    private var finishEvening: LocalTime
+    private var startMorning: List<Int>,
+    private var finishMorning: List<Int>,
+    private var startEvening: List<Int>,
+    private var finishEvening: List<Int>
 ) {
 
 
