@@ -9,23 +9,22 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.ole.tattoadmin.data.Month
 import com.ole.citastatto.ui.theme.CitasTattoTheme
+import com.ole.tattoadmin.data.Month
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.time.LocalTime
 
 class MainActivity : ComponentActivity() {
 
     private val monthsCollectionRef = Firebase.firestore.collection("Months")
     //Default working hours in that month
-    val startTimeMorning: List<Int> = listOf<Int>(10,0)
-    val finishTimeMorning: List<Int> = listOf<Int>(14,0)
-    val startTimeEvening: List<Int> = listOf<Int>(17,0)
-    val finishTimeEvening: List<Int> = listOf<Int>(20,0)
+    val startTimeMorning: List<Int> = listOf(10,0)
+    val finishTimeMorning: List<Int> = listOf(14,0)
+    val startTimeEvening: List<Int> = listOf(17,0)
+    val finishTimeEvening: List<Int> = listOf(20,0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ButtonAppointment() {
-        var initializer=Initializer(2022,4,startTimeMorning,finishTimeMorning,startTimeEvening,finishTimeEvening)
+        val initializer=Initializer(2022,4,startTimeMorning,finishTimeMorning,startTimeEvening,finishTimeEvening)
         Button(
             onClick = {
                 val month= initializer.initializeMonth()
