@@ -4,7 +4,6 @@ import com.ole.tattoadmin.data.Day
 import com.ole.tattoadmin.data.Month
 import com.ole.tattoadmin.data.Stripe
 import java.time.LocalDate
-import java.time.LocalTime
 import java.time.YearMonth
 
 class Initializer(
@@ -22,7 +21,7 @@ class Initializer(
         val name = YearMonth.of(yearNumber, monthNumber).month.name
         val days = fillDays()
 
-        return Month(monthName = name, days = days)
+        return Month(year = yearNumber,monthNumber=monthNumber, monthName = name, days = days)
     }
 
 
