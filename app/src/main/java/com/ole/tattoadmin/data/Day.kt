@@ -3,6 +3,7 @@ package com.ole.tattoadmin.data
 import java.time.LocalTime
 
 data class Day(
+    val month: String,
     val weekDay: String,
     val dayInMonth: Int,
     val startMorning: List<Int> = listOf(0,0),

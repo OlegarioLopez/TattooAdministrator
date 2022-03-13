@@ -18,14 +18,16 @@ class Initializer(
 
     fun initializeMonth():Month{
 
-        val name = YearMonth.of(yearNumber, monthNumber).month.name
-        val days = fillDays()
+        val yearMonth = YearMonth.of(yearNumber, monthNumber)
+        val name = yearMonth.month.name
+        val days = yearMonth.lengthOfMonth()
+            //fillDays()
 
         return Month(year = yearNumber,monthNumber=monthNumber, monthName = name, days = days)
     }
 
 
-    private fun fillDays(): MutableList<Day> {
+     fun initializeDays(): MutableList<Day> {
 
         val auxListDays:MutableList<Day> = mutableListOf()
 
@@ -35,7 +37,7 @@ class Initializer(
             val dayName = dayDate.dayOfWeek.name
             val dayStripes = fillStripes(dayDate)
 
-            val auxDay=Day(weekDay = dayName, dayInMonth = dayNumber, startMorning,finishMorning,startEvening,finishEvening)
+            val auxDay=Day(month = YearMonth.of(yearNumber, monthNumber).month.name, weekDay = dayName, dayInMonth = dayNumber, startMorning,finishMorning,startEvening,finishEvening)
             auxDay.stripes = dayStripes
             auxListDays.add(auxDay)
         }
