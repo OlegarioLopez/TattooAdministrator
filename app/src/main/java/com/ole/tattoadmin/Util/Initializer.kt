@@ -1,4 +1,4 @@
-package com.ole.tattoadmin
+package com.ole.tattoadmin.Util
 
 import com.ole.tattoadmin.data.Day
 import com.ole.tattoadmin.data.Month
