@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ole.tattoadmin.Util.ScreenRoutes
 import com.ole.tattoadmin.ui.Screens.SaveMonthData
+import com.ole.tattoadmin.ui.Screens.SpotsViewer
 import com.ole.tattoadmin.ui.Screens.Success
 
 
@@ -18,6 +19,12 @@ fun Navigation() {
         }
         composable(route = ScreenRoutes.SusccessScreen.route){
             Success()
+        }
+        composable(route = ScreenRoutes.SpotViewerScreen.route){
+            SpotsViewer(navController)
+        }
+        composable(route = ScreenRoutes.SpotDetailScreen.route){
+
         }
     }
 }

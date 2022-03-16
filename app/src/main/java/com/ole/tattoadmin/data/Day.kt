@@ -3,13 +3,13 @@ package com.ole.tattoadmin.data
 import java.time.LocalTime
 
 data class Day(
-    val month: String,
-    val weekDay: String,
-    val dayInMonth: Int,
-    val startMorning: List<Int> = listOf(0,0),
-    val finishMorning: List<Int> = listOf(0,0),
-    val startEvening: List<Int> = listOf(0,0),
-    val finishtEvening: List<Int> = listOf(0,0),
+    var month: String ="",
+    var weekDay: String="",
+    var dayInMonth: Int=0,
+    var startMorning: List<Int> = listOf(0,0),
+    var finishMorning: List<Int> = listOf(0,0),
+    var startEvening: List<Int> = listOf(0,0),
+    var finishtEvening: List<Int> = listOf(0,0),
 ){
     private var startMorningTime: LocalTime? = LocalTime.of(0,0)
     private var finishMorningTime: LocalTime? = LocalTime.of(0,0)

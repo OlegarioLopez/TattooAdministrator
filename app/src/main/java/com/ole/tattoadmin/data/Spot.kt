@@ -3,9 +3,9 @@ package com.ole.tattoadmin.data
 import java.time.Duration
 import java.time.LocalTime
 
-data class Stripe (
-    val month: String,
-    val dayInMonth: Int,
+data class Spot (
+    val month: String="",
+    val dayInMonth: Int=0,
     var availability: Boolean = true,
     var bookedBy: String = "",
     var momentIni: List<Int> = listOf(0,0),
@@ -21,5 +21,22 @@ data class Stripe (
         momentFinTime = LocalTime.of(momentFin[0],momentFin[1])
         duration = Duration.between(momentIniTime,momentFinTime).toMinutes()
         key="$dayInMonth${momentIni.get(0)}${momentIni.get(1)}".toInt()
+    }
+
+    override fun toString(): String {
+        updateInternals()
+        return "De $momentIniTime a $momentFinTime"
+    }
+
+    fun toStringShort(): String {
+        updateInternals()
+        return "$momentIniTime-$momentFinTime"
+    }
+
+    fun updateInternals(){
+        momentIniTime = LocalTime.of(momentIni[0],momentIni[1])
+        momentFinTime = LocalTime.of(momentFin[0],momentFin[1])
+        duration = Duration.between(momentIniTime,momentFinTime).toMinutes()
+
     }
 }

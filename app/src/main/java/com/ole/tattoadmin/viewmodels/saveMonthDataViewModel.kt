@@ -6,7 +6,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ole.tattoadmin.data.Day
 import com.ole.tattoadmin.data.Month
-import com.ole.tattoadmin.data.Stripe
+import com.ole.tattoadmin.data.Spot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ class saveMonthDataViewModel : ViewModel() {
 
     private val monthsCollectionRef = Firebase.firestore.collection("Months")
     private val daysCollectionRef = Firebase.firestore.collection("Days")
-    private val stripesCollectionRef = Firebase.firestore.collection("Stripes")
+    private val spotsCollectionRef = Firebase.firestore.collection("Spots")
 
     fun saveMonth(month: Month) = CoroutineScope(Dispatchers.IO).launch {
         try {
@@ -38,10 +38,10 @@ class saveMonthDataViewModel : ViewModel() {
         }
     }
 
-    fun saveStripes(stripes: MutableList<Stripe>) = CoroutineScope(Dispatchers.IO).launch {
+    fun saveSpots(spots: MutableList<Spot>) = CoroutineScope(Dispatchers.IO).launch {
         try {
-            for (stripe in stripes) {
-                stripesCollectionRef.add(stripe).await()
+            for (spot in spots) {
+                spotsCollectionRef.add(spot).await()
 
             }
 

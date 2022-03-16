@@ -2,7 +2,7 @@ package com.ole.tattoadmin.Util
 
 import com.ole.tattoadmin.data.Day
 import com.ole.tattoadmin.data.Month
-import com.ole.tattoadmin.data.Stripe
+import com.ole.tattoadmin.data.Spot
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -50,32 +50,32 @@ class Initializer(
         return auxListDays
     }
 
-    private fun fillStripes(dayDate: LocalDate): List<Stripe> {
-        val auxListStripes: List<Stripe>
+    private fun fillSpots(dayDate: LocalDate): List<Spot> {
+        val auxListSpots: List<Spot>
 
         if (dayDate.dayOfWeek.value != 6 && dayDate.dayOfWeek.value != 7) {
-            auxListStripes = listOf(
-                Stripe(
+            auxListSpots = listOf(
+                Spot(
                     month = dayDate.month.name,
                     dayInMonth = dayDate.dayOfMonth,
                     momentIni = startMorning,
                     momentFin = finishMorning
                 ),
-                Stripe(
+                Spot(
                     month = dayDate.month.name,
                     dayInMonth = dayDate.dayOfMonth,
                     momentIni = startEvening,
                     momentFin = finishEvening
                 )
             )
-        }else auxListStripes= listOf()
-        return auxListStripes
+        }else auxListSpots= listOf()
+        return auxListSpots
     }
 
-    fun initializeStripes(): MutableList<Stripe> {
-        var auxList: MutableList<Stripe> = mutableListOf()
+    fun initializeSpots(): MutableList<Spot> {
+        var auxList: MutableList<Spot> = mutableListOf()
         for (dayNumber in 1..YearMonth.of(yearNumber, monthNumber).lengthOfMonth()){
-           auxList.addAll(fillStripes(LocalDate.of(yearNumber,monthNumber,dayNumber)))
+           auxList.addAll(fillSpots(LocalDate.of(yearNumber,monthNumber,dayNumber)))
         }
         auxList.sortBy { it.dayInMonth }
         return auxList

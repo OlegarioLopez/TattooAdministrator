@@ -1,5 +1,6 @@
 package com.ole.tattoadmin.ui.Screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,19 +22,30 @@ fun SaveMonthData(navController: NavHostController) {
     val finishTimeEvening: List<Int> = listOf(20,0)
     val initializer=
         Initializer(2022,4,startTimeMorning,finishTimeMorning,startTimeEvening,finishTimeEvening)
-    Button(
-        onClick = {
-            val month= initializer.initializeMonth()
-            val days= initializer.initializeDays()
-            val stripes = initializer.initializeStripes()
-            viewModel.saveMonth(month)
-            viewModel.saveDays(days)
-            viewModel.saveStripes(stripes)
-            navController.navigate(ScreenRoutes.SusccessScreen.route)
-        },
-    ) {
-        Text(text = "Botón")
+    Column() {
+        Button(
+            onClick = {
+                val month= initializer.initializeMonth()
+                val days= initializer.initializeDays()
+                val Spots = initializer.initializeSpots()
+                viewModel.saveMonth(month)
+                viewModel.saveDays(days)
+                viewModel.saveSpots(Spots)
+                navController.navigate(ScreenRoutes.SusccessScreen.route)
+            },
+        ) {
+            Text(text = "botón")
+        }
+        Button(
+            onClick = {
+
+                navController.navigate(ScreenRoutes.SpotViewerScreen.route)
+            },
+        ) {
+            Text(text = "Planificación")
+        }
     }
+
 }
 
 
