@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.ole.tattoadmin.viewmodels.SpotDetailScreenViewModel
 import com.ole.tattoadmin.viewmodels.SpotsViewerViewModel
 
 
@@ -28,6 +29,8 @@ fun SpotsViewer(navController: NavHostController) {
 
 
     var viewModel = SpotsViewerViewModel()
+    var detailViewModel =
+        SpotDetailScreenViewModel() //TODO quitar esta linea organizar bien los viewmodels
     val listDays = viewModel.daysAvailables
     val listSpots = viewModel.spotsAvailables
 
@@ -43,6 +46,7 @@ fun SpotsViewer(navController: NavHostController) {
             itemContent = { currentDay ->
                 Text(
                     text = currentDay.weekDay + "," + currentDay.dayInMonth,
+                    color = Color.White,
                     fontSize = 20.sp,
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Bold,
@@ -58,40 +62,48 @@ fun SpotsViewer(navController: NavHostController) {
                     items(
                         items = listSpots.value.filter { it.dayInMonth == currentDay.dayInMonth },
                         itemContent = { currentSpot ->
-                                Card(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .wrapContentHeight(Alignment.CenterVertically)
-                                        .padding(6.dp)
-                                        .size(width = 150.dp, height = 100.dp),
-                                    onClick = {},
-                                    backgroundColor = Color(if (currentSpot.availability) 0xFF3C822C else 0xFFC20114),
-                                    elevation = 8.dp,
-                                    shape = RoundedCornerShape(16.dp)
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(Alignment.CenterVertically)
+                                    .padding(6.dp)
+                                    .size(width = 150.dp, height = 100.dp),
+                                onClick = {
+                                    detailViewModel.changeSpot(
+                                        currentSpot,
+                                        currentSpot.copy(dayInMonth = 18))
+                                },
+                                backgroundColor = Color(if (currentSpot.availability) 0xFF3C822C else 0xFFC20114),
+                                elevation = 8.dp,
+                                shape = RoundedCornerShape(16.dp)
 
-                                ) {
-                                    Column() {
-                                        Text(
-                                            text = currentSpot.toStringShort(),
-                                            fontSize = 15.sp,
-                                            fontFamily = FontFamily.Default,
-                                            fontWeight = FontWeight.Bold,
-                                            modifier = Modifier.padding(vertical = 5.dp).fillMaxWidth(),
-                                            textAlign = TextAlign.Center
-                                        )
+                            ) {
+                                Column() {
+                                    Text(
+                                        text = currentSpot.toStringShort(),
+                                        fontSize = 15.sp,
+                                        fontFamily = FontFamily.Default,
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier
+                                            .padding(vertical = 5.dp)
+                                            .fillMaxWidth(),
+                                        textAlign = TextAlign.Center
+                                    )
 
-                                        Text(
-                                            text = if (currentSpot.availability) "Disponible" else currentSpot.bookedBy,
-                                            fontSize = 15.sp,
-                                            fontFamily = FontFamily.Default,
-                                            fontWeight = FontWeight.Bold,
-                                            modifier = Modifier.padding(vertical = 5.dp).fillMaxWidth(),
-                                            textAlign = TextAlign.Center
-                                        )
-
-                                    }
+                                    Text(
+                                        text = if (currentSpot.availability) "Disponible" else currentSpot.bookedBy, //TODO no hardcodear el Disponible
+                                        fontSize = 15.sp,
+                                        fontFamily = FontFamily.Default,
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier
+                                            .padding(vertical = 5.dp)
+                                            .fillMaxWidth(),
+                                        textAlign = TextAlign.Center
+                                    )
 
                                 }
+
+                            }
 
                         })
                 }
