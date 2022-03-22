@@ -1,12 +1,12 @@
-package com.ole.tattoadmin.viewmodels
+package com.ole.tattoadmin.presentation.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.ole.tattoadmin.data.Day
-import com.ole.tattoadmin.data.Month
-import com.ole.tattoadmin.data.Spot
+import com.ole.tattoadmin.domain.model.Day
+import com.ole.tattoadmin.domain.model.Month
+import com.ole.tattoadmin.domain.model.Spot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

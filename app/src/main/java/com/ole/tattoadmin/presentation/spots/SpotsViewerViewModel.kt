@@ -1,4 +1,4 @@
-package com.ole.tattoadmin.viewmodels
+package com.ole.tattoadmin.presentation.spots
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.ole.tattoadmin.data.Day
-import com.ole.tattoadmin.data.Spot
+import com.ole.tattoadmin.domain.model.Day
+import com.ole.tattoadmin.domain.model.Spot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

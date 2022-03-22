@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.ole.tattoadmin.Util.Initializer
 import com.ole.tattoadmin.Util.ScreenRoutes
-import com.ole.tattoadmin.viewmodels.saveMonthDataViewModel
+import com.ole.tattoadmin.presentation.home.saveMonthDataViewModel
 
 
 //TODO Cambiar los mensajes de log por Toast, para ello hay que investigar como pasar un objeto context a la función

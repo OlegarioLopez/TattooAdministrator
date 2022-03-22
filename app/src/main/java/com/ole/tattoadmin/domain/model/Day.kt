@@ -1,4 +1,4 @@
-package com.ole.tattoadmin.data
+package com.ole.tattoadmin.domain.model
 
 import java.time.LocalTime
 

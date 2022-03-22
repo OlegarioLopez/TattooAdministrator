@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.ole.tattoadmin.viewmodels.SpotsViewerViewModel
+import com.ole.tattoadmin.presentation.spots.SpotsViewerViewModel
 
 
 @OptIn(ExperimentalMaterialApi::class)
