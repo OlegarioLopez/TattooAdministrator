@@ -34,7 +34,7 @@ fun SaveMonthData(navController: NavHostController) {
                 navController.navigate(ScreenRoutes.SusccessScreen.route)
             },
         ) {
-            Text(text = "botón")
+            Text(text = "Mes próximo")
         }
         Button(
             onClick = {
@@ -42,7 +42,7 @@ fun SaveMonthData(navController: NavHostController) {
                 navController.navigate(ScreenRoutes.SpotViewerScreen.route)
             },
         ) {
-            Text(text = "Planificación")
+            Text(text = "Citas")
         }
     }
 
