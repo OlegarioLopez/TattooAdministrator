@@ -1,5 +1,7 @@
 package com.ole.tattoadmin.presentation.spots
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -28,6 +30,9 @@ class SpotsViewerViewModel : ViewModel() {
 
     private val _spotsAvailables = mutableStateOf<List<Spot>>(mutableListOf())
     var spotsAvailables: State<List<Spot>> = _spotsAvailables
+
+    private val _currentSpot = mutableStateOf<Spot>(Spot())
+    var currentSpot: State<Spot> = _currentSpot
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -76,6 +81,17 @@ class SpotsViewerViewModel : ViewModel() {
         }
 
         return auxDaysAvailables
+
+    }
+
+    fun saveCurrentSpot(spot: Spot) {
+
+        viewModelScope.launch {
+            withContext(Dispatchers.Main){
+                _currentSpot.value = spot
+                Log.d(TAG,"current spot seteado")
+            }
+        }
 
     }
 }
