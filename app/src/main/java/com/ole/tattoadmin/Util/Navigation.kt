@@ -27,7 +27,7 @@ fun Navigation() {
         composable(route = ScreenRoutes.SpotViewerScreen.route){
             SpotsViewer(navController,spotsViewModel)
         }
-        composable(route = ScreenRoutes.SpotViewerScreen.route){
+        composable(route = ScreenRoutes.SaveMonthData.route){
             SaveMonthData(navController)
         }
         composable(route = ScreenRoutes.SpotDetailScreen.route){
