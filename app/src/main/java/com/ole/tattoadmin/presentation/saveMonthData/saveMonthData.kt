@@ -36,14 +36,6 @@ fun SaveMonthData(navController: NavHostController) {
         ) {
             Text(text = "Planificar el próximo mes")
         }
-        Button(
-            onClick = {
-
-                navController.navigate(ScreenRoutes.SpotViewerScreen.route)
-            },
-        ) {
-            Text(text = "Ver/Modificar citas")
-        }
     }
 
 }
