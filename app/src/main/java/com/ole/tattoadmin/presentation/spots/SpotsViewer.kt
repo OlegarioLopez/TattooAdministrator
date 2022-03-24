@@ -25,12 +25,11 @@ import com.ole.tattoadmin.presentation.spots.SpotsViewerViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SpotsViewer(navController: NavHostController) {
+fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerViewModel,) {
 
 
-    var viewModel = SpotsViewerViewModel()
-    val listDays = viewModel.daysAvailables
-    val listSpots = viewModel.spotsAvailables
+    val listDays = spotsViewModel.daysAvailables
+    val listSpots = spotsViewModel.spotsAvailables
 
 
     LazyColumn(
@@ -67,7 +66,7 @@ fun SpotsViewer(navController: NavHostController) {
                                     .size(width = 150.dp, height = 100.dp),
                                 onClick = {
 
-                                    viewModel.saveCurrentSpot(currentSpot)
+                                    spotsViewModel.saveCurrentSpot(currentSpot)
                                     navController.navigate(ScreenRoutes.SpotDetailScreen.route)
                                 },
                                 backgroundColor = Color(if (currentSpot.availability) 0xFF3C822C else 0xFFC20114),
