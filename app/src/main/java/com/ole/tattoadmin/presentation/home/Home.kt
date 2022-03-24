@@ -13,7 +13,7 @@ fun Home(navController: NavHostController) {
     Column() {
         Button(
             onClick = {
-                navController.navigate(ScreenRoutes.SusccessScreen.route)
+                navController.navigate(ScreenRoutes.SaveMonthData.route)
             },
         ) {
             Text(text = "Planificar el próximo mes")
