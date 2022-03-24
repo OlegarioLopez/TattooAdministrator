@@ -42,7 +42,6 @@ class saveMonthDataViewModel : ViewModel() {
         try {
             for (spot in spots) {
                 spotsCollectionRef.add(spot).await()
-
             }
 
         } catch (e: Exception) {
