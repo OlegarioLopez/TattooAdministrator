@@ -36,7 +36,7 @@ fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerVie
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(Color(0xFF0C120C))
+            .background(Color(0xFFf0f7ee))
     ) {
         items(
             items = listDays.value,
@@ -53,7 +53,7 @@ fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerVie
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight()
-                        .background(Color(0xFF0C120C))
+                        .background(Color(0xFFf0f7ee))
                 ) {
                     items(
                         items = listSpots.value.filter { it.dayInMonth == currentDay.dayInMonth },
