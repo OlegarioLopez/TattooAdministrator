@@ -34,11 +34,14 @@ fun shiftsCheck(viewModel: saveMonthDataViewModel) {
                     Checkbox(
                         modifier = Modifier.fillMaxWidth(),
                         checked = isChecked.value,
-                        enabled = if( !isChecked.value && viewModel.someShiftSelected.value) false else true,
+                        enabled = if( !isChecked.value && viewModel.isShiftSelected.value) false else true,
                         onCheckedChange = {
-                            Log.d("check",viewModel.someShiftSelected.value.toString())
-                            viewModel.selectNumberShifts()
+
+                            viewModel.isShiftSelected()
+
                             isChecked.value = it
+                            // TODO Investigar por que esto rompe el funcionamiento de los check if(isChecked.value) viewModel.numberShiftSelected(currentShift)
+
                         },
                         colors = CheckboxDefaults.colors(Color.Green)
                     )
