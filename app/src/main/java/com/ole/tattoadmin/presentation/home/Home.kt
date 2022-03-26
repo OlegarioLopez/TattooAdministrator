@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,7 +17,7 @@ import com.ole.tattoadmin.Util.ScreenRoutes
 fun Home(navController: NavHostController) {
 
     Box(modifier =Modifier.background(Color(0xFFf0f7ee)).fillMaxSize()) {
-        Column() {
+        Column{
             Button(
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFA79DCC)),
                 onClick = {
