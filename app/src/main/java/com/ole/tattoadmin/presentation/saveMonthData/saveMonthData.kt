@@ -19,13 +19,14 @@ import com.ole.tattoadmin.presentation.saveMonthData.shiftsCheck
 
 
 //TODO Cambiar los mensajes de log por Toast, para ello hay que investigar como pasar un objeto context a la función
+
+
 @Composable
-fun SaveMonthData(navController: NavHostController) {
+fun SaveMonthData(navController: NavHostController, saveMonthDataViewModel: saveMonthDataViewModel) {
     //Default working hours in that month
 
 
-
-    val viewModel = saveMonthDataViewModel()
+    val viewModel = saveMonthDataViewModel
     val nextMonth = viewModel.nextMonth
     val startTimeMorning: List<Int> = listOf(10, 0)
     val finishTimeMorning: List<Int> = listOf(14, 0)
@@ -85,7 +86,7 @@ fun SaveMonthData(navController: NavHostController) {
             Spacer(modifier = Modifier.size(12.dp))
 
             Row() {
-                for(i in 0..viewModel.numberShiftSelected.value){
+                for(i in 1..viewModel.numberShiftSelected.value){
                     Card(elevation = 20.dp){
                         Text(text = i.toString())
                     }
