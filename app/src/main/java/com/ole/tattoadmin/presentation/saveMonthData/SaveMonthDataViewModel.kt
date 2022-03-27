@@ -69,8 +69,9 @@ class saveMonthDataViewModel : ViewModel() {
         }
     }
 
-    fun isShiftSelected() {
+    fun isShiftSelected(i: Int) {
         _isShiftSelected.value = !_isShiftSelected.value
+        _numberShiftSelected.value = i
     }
 
     fun saveSpots(spots: MutableList<Spot>) = CoroutineScope(Dispatchers.IO).launch {
@@ -112,8 +113,5 @@ class saveMonthDataViewModel : ViewModel() {
         }
     }
 
-    fun numberShiftSelected(currentShift: Int) {
 
-        _numberShiftSelected.value = currentShift
-    }
 }
