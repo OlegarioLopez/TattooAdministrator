@@ -21,33 +21,26 @@ fun shiftsCheck(viewModel: saveMonthDataViewModel) {
     var shifts = listOf(1,2,3,4)
 
     Spacer(modifier = Modifier.size(12.dp))
-    LazyRow(){
-        items(
-            items = shifts,
-            itemContent = { currentShift ->
-                Row(
-                ) {
-                    Text(text = currentShift.toString())
+    Row {
 
-                    val isChecked = rememberSaveable() { mutableStateOf(false) }
+        for(currentShift in shifts){
+            Text(text = currentShift.toString())
 
-                    Checkbox(
-                        modifier = Modifier.fillMaxWidth(),
-                        checked = isChecked.value,
-                        enabled = if( !isChecked.value && viewModel.isShiftSelected.value) false else true,
+            val isChecked = rememberSaveable() { mutableStateOf(false) }
+
+            Checkbox(
+                checked = isChecked.value,
+                colors = CheckboxDefaults.colors(Color.Green),
+                enabled = if( !isChecked.value && viewModel.isShiftSelected.value) false else true,
                         onCheckedChange = {
 
-                            viewModel.isShiftSelected()
-
-                            isChecked.value = it
-                            // TODO Investigar por que esto rompe el funcionamiento de los check if(isChecked.value) viewModel.numberShiftSelected(currentShift)
-
-                        },
-                        colors = CheckboxDefaults.colors(Color.Green)
-                    )
-                    Spacer(modifier = Modifier.size(6.dp))
-                }
-            })
+                    isChecked.value = it
+                    if(isChecked.value) viewModel.isShiftSelected(currentShift)
+                    else viewModel.isShiftSelected(0)
+                },
+            )
+            Spacer(modifier = Modifier.size(6.dp))
+        }
     }
 }
 
