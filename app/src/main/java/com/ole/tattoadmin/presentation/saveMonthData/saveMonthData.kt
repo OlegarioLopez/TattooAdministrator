@@ -1,5 +1,6 @@
 package com.ole.tattoadmin.ui.Screens
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -14,6 +15,7 @@ import androidx.navigation.NavHostController
 import com.ole.tattoadmin.Util.Initializer
 import com.ole.tattoadmin.Util.ScreenRoutes
 import com.ole.tattoadmin.presentation.home.saveMonthDataViewModel
+import com.ole.tattoadmin.presentation.saveMonthData.components.timePicker
 import com.ole.tattoadmin.presentation.saveMonthData.dayCheckBox
 import com.ole.tattoadmin.presentation.saveMonthData.shiftsCheck
 
@@ -22,7 +24,7 @@ import com.ole.tattoadmin.presentation.saveMonthData.shiftsCheck
 
 
 @Composable
-fun SaveMonthData(navController: NavHostController, saveMonthDataViewModel: saveMonthDataViewModel) {
+fun SaveMonthData(context: Context, navController: NavHostController, saveMonthDataViewModel: saveMonthDataViewModel) {
     //Default working hours in that month
 
 
@@ -88,7 +90,12 @@ fun SaveMonthData(navController: NavHostController, saveMonthDataViewModel: save
             Row() {
                 for(i in 1..viewModel.numberShiftSelected.value){
                     Card(elevation = 20.dp){
-                        Text(text = i.toString())
+                        Column() {
+                            timePicker(context = context,viewModel.numberShiftSelected.value)
+                            timePicker(context = context,viewModel.numberShiftSelected.value)
+                        }
+
+
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.ole.tattoadmin
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,7 +16,7 @@ import com.ole.tattoadmin.ui.Screens.Success
 
 
 @Composable
-fun Navigation() {
+fun Navigation(context: Context) {
     var spotsViewModel = SpotsViewerViewModel()
     val saveMonthDataViewModel = saveMonthDataViewModel()
 
@@ -31,7 +32,7 @@ fun Navigation() {
             SpotsViewer(navController,spotsViewModel)
         }
         composable(route = ScreenRoutes.SaveMonthData.route){
-            SaveMonthData(navController,saveMonthDataViewModel)
+            SaveMonthData(context,navController,saveMonthDataViewModel)
         }
         composable(route = ScreenRoutes.SpotDetailScreen.route){
             SpotDetailScreen(navController,spotsViewModel)
