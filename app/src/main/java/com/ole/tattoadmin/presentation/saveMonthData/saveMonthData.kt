@@ -1,12 +1,14 @@
 package com.ole.tattoadmin.ui.Screens
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -17,49 +19,47 @@ import com.ole.tattoadmin.Util.ScreenRoutes
 import com.ole.tattoadmin.presentation.home.saveMonthDataViewModel
 import com.ole.tattoadmin.presentation.saveMonthData.components.timePicker
 import com.ole.tattoadmin.presentation.saveMonthData.dayCheckBox
-import com.ole.tattoadmin.presentation.saveMonthData.shiftsCheck
+import java.time.LocalDate
 
 
 //TODO Cambiar los mensajes de log por Toast, para ello hay que investigar como pasar un objeto context a la función
 
 
 @Composable
-fun SaveMonthData(context: Context, navController: NavHostController, saveMonthDataViewModel: saveMonthDataViewModel) {
+fun SaveMonthData(
+    context: Context,
+    navController: NavHostController,
+    saveMonthDataViewModel: saveMonthDataViewModel
+) {
     //Default working hours in that month
 
 
-    val viewModel = saveMonthDataViewModel
+    val viewModel = remember() {
+        saveMonthDataViewModel
+    }
     val nextMonth = viewModel.nextMonth
-    val startTimeMorning: List<Int> = listOf(10, 0)
-    val finishTimeMorning: List<Int> = listOf(14, 0)
-    val startTimeEvening: List<Int> = listOf(17, 0)
-    val finishTimeEvening: List<Int> = listOf(20, 0)
-    val initializer =
-        Initializer(
-            2022,
-            4,
-            startTimeMorning,
-            finishTimeMorning,
-            startTimeEvening,
-            finishTimeEvening
-        )
 
-    Box(modifier = Modifier
-        .background(Color(0xFFf0f7ee))
-        .fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .background(Color(0xFFf0f7ee))
+            .fillMaxSize()
+    ) {
         Column {
-            Text(text = "Vamos a preparar la planificación para " + nextMonth,
-                fontSize = 24.sp)
+            Text(
+                text = "Vamos a preparar la planificación para " + nextMonth,
+                fontSize = 24.sp
+            )
             Spacer(modifier = Modifier.size(20.dp))
 
             Text(text = "¿Qué días trabajaras? (siempre podrás cerrar días que necesites de urgencia)")
             Spacer(modifier = Modifier.size(12.dp))
 
-            Row(){
+            Row() {
                 Spacer(Modifier.width(10.dp))
                 Card(
                     elevation = 12.dp
                 ) {
+                    var dayNumber = 1
                     LazyRow(
                         modifier = Modifier
                             .wrapContentHeight()
@@ -71,8 +71,8 @@ fun SaveMonthData(context: Context, navController: NavHostController, saveMonthD
 
                             items = viewModel.listDays,
                             itemContent = { currentDay ->
-                                dayCheckBox(day = currentDay,viewModel)
-
+                                dayCheckBox(day = currentDay, dayNumber, viewModel)
+                                dayNumber++
                             })
                     }
 
@@ -81,35 +81,67 @@ fun SaveMonthData(context: Context, navController: NavHostController, saveMonthD
 
             Spacer(Modifier.height(15.dp))
 
-            Text(text = "¿Cuántos turnos trabajaras al día?")
             Spacer(modifier = Modifier.size(12.dp))
 
-            shiftsCheck(viewModel)
-            Spacer(modifier = Modifier.size(12.dp))
+            Column {
+                Row {
 
-            Row() {
-                for(i in 1..viewModel.numberShiftSelected.value){
-                    Card(elevation = 20.dp){
-                        Column() {
-                            timePicker(context = context,viewModel.numberShiftSelected.value)
-                            timePicker(context = context,viewModel.numberShiftSelected.value)
-                        }
+                    Text(text = "¿Inicio turno de mañana?")
+                    timePicker(context = context, viewModel = viewModel)
 
-
+                }
+                if (viewModel.shiftsTimeFilled.value > 0) {
+                    Row {
+                        Text(text = "¿ Fin turno de mañana?")
+                        timePicker(context = context, viewModel = viewModel)
                     }
                 }
+                if (viewModel.shiftsTimeFilled.value > 1) {
+                    Row {
+                        Text(text = "¿ Inicio turno de tarde?")
+                        timePicker(context = context, viewModel = viewModel)
+                    }
+                }
+                if (viewModel.shiftsTimeFilled.value > 2) {
+                    Row {
+                        Text(text = "¿ Fin turno de tarde?")
+                        timePicker(context = context, viewModel = viewModel)
+                    }
+                }
+
             }
             Button(
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFA79DCC)),
                 onClick = {
-                    val month = initializer.initializeMonth()
-                    val days = initializer.initializeDays()
-                    val Spots = initializer.initializeSpots()
-                    viewModel.saveMonth(month)
-                    viewModel.saveDays(days)
-                    viewModel.saveSpots(Spots)
-                    navController.navigate(ScreenRoutes.SusccessScreen.route
-                    )
+                    if (viewModel.shiftsTimeFilled.value == 4) {
+                        val initializer =
+                            Initializer(
+                                startMorning = viewModel.listOfShifts.value[0],
+                                finishMorning = viewModel.listOfShifts.value[1],
+                                startEvening = viewModel.listOfShifts.value[2],
+                                finishEvening = viewModel.listOfShifts.value[3],
+                                monthNumber = LocalDate.now().monthValue,
+                                yearNumber = LocalDate.now().year,
+                                daysWork = viewModel.daysSelected.value
+                            )
+                        val month = initializer.initializeMonth()
+                        val days = initializer.initializeDays()
+                        val Spots = initializer.initializeSpots()
+                        print(viewModel.daysSelected.value)
+                        viewModel.saveMonth(month)
+                         viewModel.saveDays(days)
+                         viewModel.saveSpots(Spots)
+                        navController.navigate(
+                            ScreenRoutes.SusccessScreen.route
+                        )
+                    } else {
+                        print(viewModel.daysSelected.value)
+                        Toast.makeText(
+                            context,
+                            "Debe introducir todos los datos" + viewModel.daysSelected.value,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 },
             ) {
                 Text(text = "Guardar esta planificacion para el próximo mes")
@@ -119,5 +151,4 @@ fun SaveMonthData(context: Context, navController: NavHostController, saveMonthD
 
 
 }
-
 

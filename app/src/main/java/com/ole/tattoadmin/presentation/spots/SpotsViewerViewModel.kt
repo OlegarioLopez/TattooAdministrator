@@ -16,6 +16,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 class SpotsViewerViewModel : ViewModel() {
 
@@ -51,7 +52,7 @@ class SpotsViewerViewModel : ViewModel() {
         val auxSpotsAvailables: MutableList<Spot> = mutableListOf()
 
         val querySnapshot =
-            spotsCollectionOrdered.whereEqualTo("month", "APRIL").get().await()
+            spotsCollectionOrdered.whereEqualTo("month", LocalDate.now().month.name).get().await()
 
         for (document in querySnapshot.documents) {
 
@@ -70,7 +71,7 @@ class SpotsViewerViewModel : ViewModel() {
         val auxDaysAvailables: MutableList<Day> = mutableListOf()
 
         val querySnapshot =
-            daysCollectionRef.whereEqualTo("month", "APRIL").get().await()
+            daysCollectionRef.whereEqualTo("month", LocalDate.now().month.name).get().await()
 
         for (document in querySnapshot.documents) {
 

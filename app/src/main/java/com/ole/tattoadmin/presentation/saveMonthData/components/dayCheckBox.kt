@@ -1,6 +1,5 @@
 package com.ole.tattoadmin.presentation.saveMonthData
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
@@ -16,20 +15,26 @@ import androidx.compose.ui.unit.dp
 import com.ole.tattoadmin.presentation.home.saveMonthDataViewModel
 
 @Composable
-fun dayCheckBox(day: String, viewModel: saveMonthDataViewModel){
+fun dayCheckBox(day: String,number: Int, viewModel: saveMonthDataViewModel){
 
+    val dayCheckboxNumber = rememberSaveable { number}
+    val viewModel = remember( ) {
+        viewModel
+    }
     Spacer(modifier = Modifier.size(12.dp))
     Column(
         Modifier.width(IntrinsicSize.Max)
     ) {
         val isChecked = rememberSaveable() { mutableStateOf(false) }
-        Box(                modifier = Modifier.fillMaxWidth(),
+        Box( modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center){
             Checkbox(
                 modifier = Modifier.fillMaxWidth(),
                 checked = isChecked.value,
                 onCheckedChange = {
                     isChecked.value = it
+                    if(isChecked.value) viewModel.addDay(dayCheckboxNumber)
+                    else viewModel.deleteDay(dayCheckboxNumber)
                 },
                 colors = CheckboxDefaults.colors(Color.Green)
             )
@@ -39,3 +44,4 @@ fun dayCheckBox(day: String, viewModel: saveMonthDataViewModel){
         Text(day)
     }
 }
+

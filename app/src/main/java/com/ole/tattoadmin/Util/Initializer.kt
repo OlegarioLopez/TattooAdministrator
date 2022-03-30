@@ -1,5 +1,6 @@
 package com.ole.tattoadmin.Util
 
+import androidx.compose.runtime.State
 import com.ole.tattoadmin.domain.model.Day
 import com.ole.tattoadmin.domain.model.Month
 import com.ole.tattoadmin.domain.model.Spot
@@ -12,7 +13,8 @@ class Initializer(
     private var startMorning: List<Int>,
     private var finishMorning: List<Int>,
     private var startEvening: List<Int>,
-    private var finishEvening: List<Int>
+    private var finishEvening: List<Int>,
+    private var daysWork: Set<Int>
 ) {
 
 
@@ -53,7 +55,7 @@ class Initializer(
     private fun fillSpots(dayDate: LocalDate): List<Spot> {
         val auxListSpots: List<Spot>
 
-        if (dayDate.dayOfWeek.value != 6 && dayDate.dayOfWeek.value != 7) {
+        if (daysWork.contains(dayDate.dayOfWeek.value)) {
             auxListSpots = listOf(
                 Spot(
                     month = dayDate.month.name,

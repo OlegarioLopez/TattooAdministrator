@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.TextStyle
 import java.util.*
+import kotlin.math.min
 
 class saveMonthDataViewModel : ViewModel() {
 
@@ -27,16 +28,15 @@ class saveMonthDataViewModel : ViewModel() {
     private val spotsCollectionRef = Firebase.firestore.collection("Spots")
 
     private var spanishLocale: Locale = Locale("es", "ES")
-    var fmt: DateTimeFormatter = DateTimeFormatterBuilder() // case insensitive
-        .parseCaseInsensitive() // pattern with full month name (MMMM)
-        .toFormatter(Locale("es", "ES"))
 
-    private var _isShiftSelected = mutableStateOf<Boolean>(false)
-    val isShiftSelected: State<Boolean> = _isShiftSelected
+    private val _listOfShifts = mutableStateOf(listOf(mutableListOf<Int>(), mutableListOf<Int>(), mutableListOf<Int>(), mutableListOf<Int>()))
+    val listOfShifts: State<List<List<Int>>> = _listOfShifts
 
-    private var _numberShiftSelected = mutableStateOf<Int>(0)
-    val numberShiftSelected: State<Int> = _numberShiftSelected
+    private val _shiftsTimeFilled = mutableStateOf(0)
+    val shiftsTimeFilled: State<Int> = _shiftsTimeFilled
 
+    private val _daysSelected = mutableStateOf(mutableSetOf<Int>())
+    val daysSelected: State<Set<Int>> = _daysSelected
 
     private var currentDate =
         LocalDate.now()
@@ -67,11 +67,6 @@ class saveMonthDataViewModel : ViewModel() {
                 }
             }
         }
-    }
-
-    fun isShiftSelected(i: Int) {
-        _isShiftSelected.value = !_isShiftSelected.value
-        _numberShiftSelected.value = i
     }
 
     fun saveSpots(spots: MutableList<Spot>) = CoroutineScope(Dispatchers.IO).launch {
@@ -111,6 +106,31 @@ class saveMonthDataViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun addShift() {
+        if(_shiftsTimeFilled.value <5)  _shiftsTimeFilled.value++
+    }
+
+    fun fillShiftTime(shiftNumber: Int, hour: Int, minute: Int) {
+
+        if(_listOfShifts.value.get(shiftNumber).isEmpty() && _shiftsTimeFilled.value < 5) {
+            _listOfShifts.value.get(shiftNumber).add(hour)
+            _listOfShifts.value.get(shiftNumber).add(minute)
+        }
+        else{
+            _listOfShifts.value.get(shiftNumber)[0] = hour
+            _listOfShifts.value.get(shiftNumber)[1] = minute
+        }
+    }
+
+
+    fun addDay(dayCheckboxNumber: Int) {
+_daysSelected.value.add((dayCheckboxNumber))
+    }
+
+    fun deleteDay(dayCheckboxNumber: Int) {
+        _daysSelected.value.remove(dayCheckboxNumber)
     }
 
 
