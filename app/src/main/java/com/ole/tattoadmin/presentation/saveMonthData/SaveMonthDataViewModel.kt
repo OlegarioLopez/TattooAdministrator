@@ -45,9 +45,9 @@ class saveMonthDataViewModel : ViewModel() {
     val nextMonth =
         LocalDate.of(
             currentDate.year,
-            currentDate.monthValue + 1,
+            currentDate.monthValue,
             currentDate.dayOfMonth
-        ).month.getDisplayName(TextStyle.FULL, spanishLocale)
+        ).plusMonths(1).month.getDisplayName(TextStyle.FULL, spanishLocale)
 //TODO hacer esta variable un estado con remember
 
     fun saveMonth(month: Month) = CoroutineScope(Dispatchers.IO).launch {
