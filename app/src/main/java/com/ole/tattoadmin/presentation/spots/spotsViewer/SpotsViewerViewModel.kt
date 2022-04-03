@@ -1,4 +1,4 @@
-package com.ole.tattoadmin.presentation.spots
+package com.ole.tattoadmin.presentation.spots.spotsViewer
 
 import android.content.ContentValues.TAG
 import android.util.Log
