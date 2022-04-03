@@ -16,11 +16,10 @@ data class Spot (
 ){
     private var momentIniTime: LocalTime? = LocalTime.of(0,0)
     private var momentFinTime: LocalTime? = LocalTime.of(0,0)
+    var splitedFrom: Int = 0
+
     init {
-        momentIniTime = LocalTime.of(momentIni[0],momentIni[1])
-        momentFinTime = LocalTime.of(momentFin[0],momentFin[1])
-        duration = Duration.between(momentIniTime,momentFinTime).toMinutes()
-        key="$dayInMonth${momentIni.get(0)}${momentIni.get(1)}".toInt()
+        updateInternals()
     }
 
     override fun toString(): String {
@@ -37,6 +36,8 @@ data class Spot (
         momentIniTime = LocalTime.of(momentIni[0],momentIni[1])
         momentFinTime = LocalTime.of(momentFin[0],momentFin[1])
         duration = Duration.between(momentIniTime,momentFinTime).toMinutes()
+        key="$dayInMonth${momentIni.get(0)}${momentIni.get(1)}".toInt()
 
     }
+
 }
