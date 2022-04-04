@@ -26,13 +26,13 @@ import com.ole.tattoadmin.presentation.spots.spotsViewer.SpotsViewerViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerViewModel,) {
+fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerViewModel) {
 
 
 
-    val listDays = spotsViewModel.daysAvailables
-    val listSpots = spotsViewModel.spotsAvailables
-
+    val listDays = spotsViewModel.daysAvailables.value
+    val listSpots = spotsViewModel.spotsAvailables.value
+    spotsViewModel.updateData()
 
     LazyColumn(
         modifier = Modifier
@@ -41,7 +41,7 @@ fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerVie
             .background(Color(0xFFf0f7ee))
     ) {
         items(
-            items = listDays.value,
+            items = listDays,
             itemContent = { currentDay ->
                 Text(
                     text = currentDay.weekDay + "," + currentDay.dayInMonth,
@@ -58,7 +58,7 @@ fun SpotsViewer(navController: NavHostController, spotsViewModel: SpotsViewerVie
                         .background(Color(0xFFf0f7ee))
                 ) {
                     items(
-                        items = listSpots.value.filter { it.dayInMonth == currentDay.dayInMonth },
+                        items = listSpots.filter { it.dayInMonth == currentDay.dayInMonth },
                         itemContent = { currentSpot ->
                             Card(
                                 modifier = Modifier

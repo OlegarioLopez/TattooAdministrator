@@ -38,13 +38,14 @@ class SpotsViewerViewModel : ViewModel() {
     init {
         viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
-                _spotsAvailables.value =  async {  retrieveSpots() }.await()
-                _daysAvailables.value =  async{ retrieveDaysWithSpots() }.await()
+                _spotsAvailables.value =    retrieveSpots()
+                _daysAvailables.value =   retrieveDaysWithSpots()
             }
 
         }
 
     }
+
 
     //TODO Comprobar si se cargan las citas en orden por día/hora
     suspend fun retrieveSpots(): MutableList<Spot> {
@@ -95,4 +96,12 @@ class SpotsViewerViewModel : ViewModel() {
         }
 
     }
-}
+
+    fun updateData(){
+        viewModelScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                _spotsAvailables.value =    retrieveSpots()
+                _daysAvailables.value =   retrieveDaysWithSpots()
+            }
+        }
+}}

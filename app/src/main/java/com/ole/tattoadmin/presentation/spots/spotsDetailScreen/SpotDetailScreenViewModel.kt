@@ -87,6 +87,7 @@ class SpotDetailScreenViewModel : ViewModel() {
                 }
             }
         }
+
     }
 
 
