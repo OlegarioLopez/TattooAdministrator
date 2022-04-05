@@ -1,11 +1,12 @@
 package com.ole.tattoadmin.ui.Screens
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.ole.tattoadmin.Util.ScreenRoutes
 import com.ole.tattoadmin.presentation.spots.spotsDetailScreen.SpotDetailScreenViewModel
 import com.ole.tattoadmin.presentation.spots.spotsViewer.SpotsViewerViewModel
 

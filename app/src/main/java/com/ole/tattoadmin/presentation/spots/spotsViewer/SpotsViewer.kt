@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ole.tattoadmin.Util.ScreenRoutes
-import com.ole.tattoadmin.presentation.spots.spotsDetailScreen.SpotDetailScreenViewModel
 import com.ole.tattoadmin.presentation.spots.spotsViewer.SpotsViewerViewModel
 
 
